@@ -5,7 +5,7 @@ on:
 
 jobs:
   run-ngrok:
-    timeout-minutes: 294
+    timeout-minutes: 300
     runs-on: windows-latest
     steps:
       - name: Checkout repository
