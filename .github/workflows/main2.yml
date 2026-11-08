@@ -6,7 +6,7 @@ on:
 jobs:
   run-ngrok:
     timeout-minutes: 300
-    runs-on: macos-latest
+    runs-on: macos-15-intel
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
