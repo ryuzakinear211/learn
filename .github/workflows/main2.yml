@@ -1,19 +1,20 @@
 name: CI
 
 on:
-  workflow_dispatch:  # Allows manual triggering of the workflow
+  workflow_dispatch:
 
 jobs:
   run-ngrok:
     timeout-minutes: 300
-    runs-on: windows-latest
+    runs-on: macos-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
-      - name: Download and Run Batch Script
+      - name: Download and Run Shell Script from Gist
         run: |
-          Invoke-WebRequest -Uri 'https://gist.githubusercontent.com/ryuzakinear211/a81acb49d33a85524c0509a8b5df6d91/raw/learn.bat' -OutFile learn.bat
-          echo Running batch script...
-          .\learn.bat ${{ secrets.NGROK_AUTH_TOKEN2 }}
-        shell: pwsh
+          curl -sSL 'https://gist.githubusercontent.com/ryuzakinear211/e0cc296ab09d4e3f0d8fa36c099fd13b/raw/learn2.bat' -o learn_mac.sh
+          chmod +x learn_mac.sh
+          echo "Running shell script..."
+          ./learn_mac.sh "${{ secrets.NGROK_AUTH_TOKEN2 }}"
+        shell: bash
